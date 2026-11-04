@@ -53,20 +53,57 @@ public class TAKE_ORDER {
                     "You chose " + toppings +
                     "\nPrice: PHP " + price);
 
-                String input = JOptionPane.showInputDialog(
-                    "Enter Diameter in inches:");
-
-                if (input == null) {
+                if (JOptionPane.showConfirmDialog(null,
+                        "Are you sure?\nYou want " + toppings + "?",
+                        "Confirm Question",
+                        JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
                     continue;
+                }
+
+                String input;
+
+                while (true) {
+
+                    input = JOptionPane.showInputDialog(
+                        "Enter Diameter in inches:");
+
+                    if (input != null) {
+                        break;
+                    }
+
+                    if (JOptionPane.showConfirmDialog(null,
+                            "Want to CANCEL the order?",
+                            "Confirm Question",
+                            JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+
+                        JOptionPane.showMessageDialog(null,
+                            "Thank you!");
+
+                        System.exit(0);
+                    }
                 }
 
                 diameter = Integer.parseInt(input);
 
-                input = JOptionPane.showInputDialog(
-                    "Enter How Many Orders?");
+                while (true) {
 
-                if (input == null) {
-                    continue;
+                    input = JOptionPane.showInputDialog(
+                        "Enter How Many?");
+
+                    if (input != null) {
+                        break;
+                    }
+
+                    if (JOptionPane.showConfirmDialog(null,
+                            "Want to CANCEL the order?",
+                            "Confirm Question",
+                            JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+
+                        JOptionPane.showMessageDialog(null,
+                            "Thank you!");
+
+                        System.exit(0);
+                    }
                 }
 
                 howMany = Integer.parseInt(input);
