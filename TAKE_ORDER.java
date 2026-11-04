@@ -4,12 +4,12 @@ public class TAKE_ORDER {
     public static void main(String[] args) {
 
         String toppings;
-        double price = 0;
-        double size;
-        double cm;
-        int order;
-        double total;
+        int diameter;
+        int howMany;
+        String discount;
+        String cardNumber;
         double amount;
+        double price;
         double change;
 
         while (true) {
@@ -17,6 +17,7 @@ public class TAKE_ORDER {
             try {
 
                 String[] choices = {
+                    "",
                     "Pepperoni",
                     "Ham and Cheese",
                     "Hawaiian"
@@ -36,6 +37,10 @@ public class TAKE_ORDER {
                     break;
                 }
 
+                if (toppings.isEmpty()) {
+                    continue;
+                }
+
                 if (toppings.equals("Pepperoni")) {
                     price = 100;
                 } else if (toppings.equals("Ham and Cheese")) {
@@ -46,7 +51,7 @@ public class TAKE_ORDER {
 
                 JOptionPane.showMessageDialog(null,
                     "You chose " + toppings +
-                    "\nAdditional price: PHP " + price);
+                    "\nPrice: PHP " + price);
 
                 String input = JOptionPane.showInputDialog(
                     "Enter Diameter in inches:");
@@ -55,8 +60,8 @@ public class TAKE_ORDER {
                     continue;
                 }
 
-                size = Double.parseDouble(input);
-                cm = size * 2.54;
+                diameter = Integer.parseInt(input);
+
                 input = JOptionPane.showInputDialog(
                     "Enter How Many Orders?");
 
@@ -64,13 +69,43 @@ public class TAKE_ORDER {
                     continue;
                 }
 
-                order = Integer.parseInt(input);
-                total = ((cm * 5) + price) * order;
+                howMany = Integer.parseInt(input);
 
-                JOptionPane.showMessageDialog(null,
-                    "Your ordered " + toppings + " Pizza\n" +
-                    "Size: " + cm + " cm\n" +
-                    "Total Price: PHP " + total);
+                String[] discounts = {
+                    "None",
+                    "Senior-PWD",
+                    "VIP"
+                };
+
+                discount = (String) JOptionPane.showInputDialog(
+                    null,
+                    "Choose Discount",
+                    "Pizza Program",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    discounts,
+                    discounts[0]
+                );
+
+                if (discount == null) {
+                    continue;
+                }
+
+                cardNumber = JOptionPane.showInputDialog(
+                    "Enter Card Number:");
+
+                if (cardNumber == null) {
+                    continue;
+                }
+
+                PIZZA pie = new PIZZA();
+                pie.setToppings(toppings);
+                pie.setDiameter(diameter);
+                pie.setHowMany(howMany);
+                pie.setDiscount(discount);
+                pie.setCardNumber(cardNumber);
+
+                double total = new BILL_ORDER().OUT(pie);
 
                 while (true) {
 
@@ -109,5 +144,7 @@ public class TAKE_ORDER {
 
             }
         }
+
+        System.exit(0);
     }
 }

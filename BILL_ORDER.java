@@ -13,7 +13,7 @@ public class BILL_ORDER {
 
             "with the size of " +
             String.format("%.2f", PIE.getDiameter() * 2.54) +
-            " centimeter\n" +
+            " centimeter\n" + "\n" +
 
             "Number of Orders: " + PIE.getHowMany() + "\n" +
 
